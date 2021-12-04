@@ -17,7 +17,9 @@ class CSVFile:
     def get_data(self):
 
         if not self.can_read:
+            #se nell'init can_read è False, vuol dire che il file non poteva essere aperto o era illeggibile
             print('Errore, file non aperto o illegibile')
+
             #esco dalla funzione tornando "niente"
             return None
 
@@ -33,9 +35,13 @@ class CSVFile:
 
                 #split di di ogni linea sulla virgola
                 elemento = line.split(',')
+
+                #funzione strip
+                elemento[-1] = elemento[-1].strip()
                 
                 #se non sono sull'intestazione
                 if elemento[0] != 'Date':
+                    
                     #aggiungo alla lista gli elementi di questa linea
                     my_list.append(elemento)
             #chiudo il file

@@ -7,7 +7,7 @@ my_file = open('sales_lezione3.csv', 'r')
 for line in my_file:
     elementi = line.split(',')
 
-    #tolgo la prima riga
+    #se non sto processando l'intestazione
     if elementi[0] != 'Date':
       
       #setto gli elementi

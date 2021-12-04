@@ -1,7 +1,6 @@
 class CSVFile ():
     # inizializzo l'oggetto e aggiungo l'attributo
-    def __init__ (self, file, name):
-        self.file = file
+    def __init__ (self, name):
         #setto il nome del file
         self.name = name
     
@@ -18,6 +17,9 @@ class CSVFile ():
 
             #split di di ogni linea sulla virgola
             elemento = line.split(',')
+
+            #funzione strip
+            elemento[-1] = elemento[-1].strip()
             
             #se non sono sull'intestazione
             if elemento[0] != 'Date':
@@ -31,11 +33,6 @@ class CSVFile ():
 
 #estesione dell'oggetto CSVFile 
 class NumericalCSVFile (CSVFile):
-
-    # inizializzo l'oggetto
-    def __init__ (self, name):
-        #setto il nome del file
-        self.name = name
 
     def get_data(self):
 
@@ -51,29 +48,29 @@ class NumericalCSVFile (CSVFile):
             #lista di supporto per salvare la riga in formato numerico (tranne il primo elemento)
             numerical_row = []
 
-            #cilco su tutti gli elemnti della riga con un enumeratore: trovo così l'indice i della posizione dell'elemento nella riga
-            for i, element in enumerate(string_row):
+            #cilco su tutti gli elementi della riga con un enumeratore: trovo così l'indice i della posizione dell'elemento nella riga
+            for i, elemento in enumerate(string_row):
 
                 if i == 0:
                     #il primo elemento della riga lo lasci in formato stringa
-                    numerical_row.append(element)
+                    numerical_row.append(elemento)
                 
                 else:
                     #converto a float tutte le altre. Ma se fallisco, stampo l'errore e rompo il ciclo
                     try:
-                        numerical_row.append(float(element))
-                    except Exeption as e:
-                        print('Errore in conversione del valore "{}" a numerico "{}"'.format(element,e))
+                        numerical_row.append(float(elemento))
+                    except Exception as e:
+                        print('Errore in conversione del valore "{}" a numerico: "{}"'.format(elemento,e))
                         break
             
-            #alla fine aggiungo la riga in formato numerico alla lista "esterna", am solo se sono riuscito a processare tutti gli elementi. Controllo per la lunghezza
+            #alla fine aggiungo la riga in formato numerico alla lista "esterna", ma solo se sono riuscito a processare tutti gli elementi. Controllo per la lunghezza
             if len(numerical_row) == len(string_row):
                 numerical_data.append(numerical_row)
             
             return numerical_data
 
 
-my_file = CSVFile('Vendite shampoo','sales_lezione3.csv')
+my_file = CSVFile(name='sales_lezione3.csv')
 print('Nome del file: "{}""'.format(my_file.name))
 print('Dati contenuti nel file: "{}""'.format(my_file.get_data()))
 

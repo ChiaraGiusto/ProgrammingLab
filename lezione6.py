@@ -5,24 +5,28 @@ class CSVFile ():
         self.name = name
         
         #alzo l'eccezione se il nome del file non è una stringa
-        if name != type(str):
-            raise Exception ('Il nome del file non è una stringa!')
+        #if name != type(str):
+            #raise Exception ('Il nome del file non è una stringa!')
     
-    def get_data(self, star=None, end=None):
+    def get_data(self, start=None, end=None):
         #lista vuota per salvare i dati
         my_list=[]
 
         #apro il file
         my_file = open('sales_lezione3.csv', 'r')
-
+        
         #leggo il file linea per linea
         for line in my_file:
             #leggo solo dalla riga 1 alla 10
-            if start and end in [my_file]:
-                print(my_file.read() [1:10])
+            #if start and end in [my_file]:
+            my_file.read([start:end])
+            
 
             #split di di ogni linea sulla virgola
             elemento = line.split(',')
+
+            #funzione strip
+            elemento[-1] = elemento[-1].strip()
             
             #se non sono sull'intestazione
             if elemento[0] != 'Date':
@@ -35,13 +39,8 @@ class CSVFile ():
         return my_list
 
 
-mia_lista = []
-start = 1
-end = 10
-obj = CSVFile(name='sales_lezione3.csv')
-mia_lista = obj.get_data()
-print ('Nome file: {}'.format(obj.name))
-print('Contenuto:')
-for x in mia_lista:
-    #print("['{}','{}']".format(x[0],x[1]))
-    print(x)
+start=2
+end=5
+my_file = CSVFile(name='sales_lezione3.csv')
+print('Nome del file: "{}""'.format(my_file.name))
+print('Dati contenuti nel file: "{}""'.format(my_file.get_data()))

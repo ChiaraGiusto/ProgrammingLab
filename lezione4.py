@@ -19,6 +19,9 @@ class CSVFile ():
             #split di di ogni linea sulla virgola
             elemento = line.split(',')
             
+            #funzione strip: toglie gli spazi alla fine e inizio... 
+            elemento[-1] = elemento[-1].strip()
+            
             #se non sono sull'intestazione
             if elemento[0] != 'Date':
                 #aggiungo alla lista gli elementi di questa linea
@@ -37,6 +40,7 @@ print('Contenuto:')
 for x in mia_lista:
     #print("['{}','{}']".format(x[0],x[1]))
     print(x)
+
 
         
 
