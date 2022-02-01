@@ -1,11 +1,16 @@
 import unittest
-from lezione5_parte1 import __init__ #verifico che il nome del file sia salvato come attributo
+from lezione5_parte1 import CSVFile 
 
 #creo una classe che estende TestCase
-class Test_attributo(unittest.TestCase):
+class TestAttributo(unittest.TestCase):
 
-    def test_attributo(self):
-        self.assertEqual(__init__(name), self.name)
+    def test_nome(self):
+        file = CSVFile('Vendite shampoo', 'sales_lezione3.csv')
+
+        #verifico che il nome del file sia salvato come attributo
+        self.assertEqual(file.name, 'sales_lezione3.csv')
         
-        #if not __init__(name) == self.name:
-            #raise Exception ('Test attributo non passato')
+        if not file.name == 'sales_lezione3.csv':
+            raise Exception ('Test attributo non passato')
+
+unittest.main()
